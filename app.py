@@ -22,6 +22,7 @@ from src.planners.dijkstra import DijkstraPlanner
 from src.planners.rrt import RRTPlanner
 from src.robot import Robot
 from src.simulation import NavigationSimulator
+from src.ui.overview import render_under_the_hood
 from src.visualization.plotter import (
     plot_environment_plotly,
     plot_environment_walkthrough_plotly,
@@ -137,6 +138,16 @@ def main() -> None:
     st.title("AI Navigation Simulator")
     st.caption("3D-ready path planning, sensor simulation, and evaluation for warehouse robotics")
 
+    simulator_tab, review_tab = st.tabs(["Simulator", "How it works"])
+
+    with review_tab:
+        render_under_the_hood()
+
+    with simulator_tab:
+        render_simulator(controls, env)
+
+
+def render_simulator(controls: dict, env: WarehouseEnvironment) -> None:
     col1, col2 = st.columns([2, 1])
 
     with col2:
